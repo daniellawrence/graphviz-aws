@@ -1,0 +1,43 @@
+
+digraph G {
+    internet [shape=none, image="./AWS_Simple_Icons_svg_eps/Non-Service Specific/SVG/Non-Service Specific copy_Internet.png"];
+    aws  [shape=none, image="./AWS_Simple_Icons_svg_eps/Non-Service Specific/SVG/Non-Service Specific copy_ AWS Cloud.png"];
+    elb  [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Elastic Load Balancing.png"];
+    web1 [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Amazon EC2 Instance.png"];
+    web2 [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Amazon EC2 Instance.png"];
+    app1 [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Amazon EC2 Instance.png"];
+    app2 [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Amazon EC2 Instance.png"];
+    db  [shape=none, image="./AWS_Simple_Icons_svg_eps/Database/SVG/Database copy_Amazon RDS MySQL DB Instance.png"];
+    db_slave  [shape=none, image="./AWS_Simple_Icons_svg_eps/Database/SVG/Database copy_Amazon RDS MySQL DB Instance.png"];
+    app1_ebs [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon EBS Volume.png"];
+    app1_ebs_snap [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon EBS Snapshot.png"];
+    app2_ebs [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon EBS Volume.png"];
+    app2_ebs_snap [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon EBS Snapshot.png"];
+    s3  [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon S3.png"];
+    gl  [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon Glacier.png"];
+    
+    subgraph cluster_a {
+        web1 -> app1 [color="blue"];
+        app1 -> db [color="red"];
+        app1 -> app1_ebs;
+        app1_ebs -> app1_ebs_snap;
+        label = "AZ a"
+    }
+
+    subgraph cluster_b {
+        web2 -> app2 [color="blue"];
+        app2 -> db_slave [color="red"];
+        db  -> db_slave [color="red"];
+        app2 -> app2_ebs;
+        app2_ebs -> app2_ebs_snap;
+        label = "AZ b"
+    }
+    
+    internet -> aws -> elb;
+    elb -> web1;
+    elb -> web2;
+
+    db  -> s3 [color="green"];
+    s3  -> gl [color="green"];
+}
+
