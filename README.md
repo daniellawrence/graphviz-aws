@@ -48,5 +48,14 @@ EOF
 Install
 -------
 
+```sh
+./setup.sh
+````
+
 How it works
 ------------
+
+* It will use the Simple AWS icons provided by AWS.
+* Convert them all to by PNG (from SVG)
+* Use graphviz/dot to generate the images
+
