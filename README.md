@@ -49,7 +49,12 @@ Install
 -------
 
 ```sh
-./setup.sh
+$ ./setup.sh 
+Downloading AWS Simple Icons    [Skipped]
+Unzipping AWS Simple Icons    [Skipped]
+Deleting MACOSX files    [Skipped]
+Installing librsvg2-bin    [Skipped]
+Images convereted: 117
 ````
 
 How it works
