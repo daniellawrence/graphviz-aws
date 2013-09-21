@@ -1,0 +1,22 @@
+
+digraph G {
+    web1 [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Amazon EC2 Instance.png"];
+    web2 [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Amazon EC2 Instance.png"];
+    app [shape=none, image="./AWS_Simple_Icons_svg_eps/Compute & Networking/SVG/Compute & Networking copy_Amazon EC2 Instance.png"];
+    db  [shape=none, image="./AWS_Simple_Icons_svg_eps/Database/SVG/Database copy_Amazon RDS MySQL DB Instance.png"];
+    db_slave  [shape=none, image="./AWS_Simple_Icons_svg_eps/Database/SVG/Database copy_Amazon RDS MySQL DB Instance.png"];
+    s3  [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon S3.png"];
+    gl  [shape=none, image="./AWS_Simple_Icons_svg_eps/Storage & Content Delivery/SVG/Storage & Content Delivery_Amazon Glacier.png"];
+    
+    web1 -> app [color="blue"];
+    web2 -> app [color="blue"];
+    
+    app -> db [color="red"];
+    db  -> db_slave [color="red"];
+
+    app -> s3 [color="green"];
+    db  -> s3 [color="green"];
+
+    s3  -> gl [color="green"];
+}
+
