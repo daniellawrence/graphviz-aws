@@ -30,14 +30,24 @@ else
    echo "[Skipped]"
 fi
 
-echo -n "Installing librsvg2-bin    "
-dpkg -l librsvg2-bin 2>&1 > /dev/null
-DPKG_RC=$?
-if [ $DPKG_RC -ne 0 ];then
-   sudo apt-get install librsvg2-bin -y
-   echo "[DONE]"
+echo -n "Installing librsvg    "
+if [[ "$OSTYPE" == "darwin"* ]]; then
+   brew ls librsvg > /dev/null 2>&1
+   if [ $? -ne 0 ];then
+      brew install librsvg
+      echo "[DONE]"
+   else
+      echo "[Skipped]"
+   fi
 else
-   echo "[Skipped]"
+   dpkg -l librsvg2-bin 2>&1 > /dev/null
+   DPKG_RC=$?
+   if [ $DPKG_RC -ne 0 ];then
+      sudo apt-get install librsvg2-bin -y
+      echo "[DONE]"
+   else
+      echo "[Skipped]"
+   fi
 fi
 
 TOTAL=0
