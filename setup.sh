@@ -31,10 +31,19 @@ else
 fi
 
 echo -n "Installing librsvg    "
+source /etc/os-release
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
    brew ls librsvg > /dev/null 2>&1
    if [ $? -ne 0 ];then
       brew install librsvg
+      echo "[DONE]"
+   else
+      echo "[Skipped]"
+   fi
+elif [[ "$ID" == "fedora"* ]]; then
+   if [[ -z $(command -v rsvg-convert) ]]; then
+      sudo dnf install -y librsvg2-tools
       echo "[DONE]"
    else
       echo "[Skipped]"
